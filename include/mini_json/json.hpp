@@ -244,7 +244,7 @@ json::parse_unicode (std::string &out)
 
   uint32_t code = 0;
   char *end = nullptr;
-  code = (uint32_t) std::strtol (&*it, &end, 16);
+  code = (uint32_t)std::strtol (&*it, &end, 16);
   // check if convertion is success
   if (end != &*it + 4)
     {

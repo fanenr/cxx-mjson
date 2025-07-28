@@ -153,7 +153,8 @@ public:
 #undef CHECK_AND_HANDLE
 
 public:
-  template <typename T = std::nullptr_t> node (T &&val = T{})
+  template <typename T = std::nullptr_t>
+  node (T &&val = T{})
   {
     assign (std::forward<T> (val));
   }

@@ -9,27 +9,30 @@
 namespace mini_mpf
 {
 
-template <typename... Types> class type_array
+template <typename... Types>
+class type_array
 {
 
 private:
   constexpr static std::size_t length = sizeof...(Types);
 
-  template <std::size_t Index, typename Arr> struct _at;
+  template <std::size_t Index, typename Arr>
+  struct _at;
 
   template <typename T, typename... Others>
-  struct _at<0, type_array<T, Others...> >
+  struct _at<0, type_array<T, Others...>>
   {
     using type = T;
   };
 
   template <std::size_t Index, typename T, typename... Others>
-  struct _at<Index, type_array<T, Others...> >
+  struct _at<Index, type_array<T, Others...>>
   {
-    using type = typename _at<Index - 1, type_array<Others...> >::type;
+    using type = typename _at<Index - 1, type_array<Others...>>::type;
   };
 
-  template <template <typename...> typename T> struct _forward
+  template <template <typename...> typename T>
+  struct _forward
   {
     using type = T<Types...>;
   };
@@ -39,7 +42,8 @@ public:
   using self = type_array<Types...>;
 
   // at is used to use a type at Pos in an array
-  template <std::size_t Index> using at = typename _at<Index, self>::type;
+  template <std::size_t Index>
+  using at = typename _at<Index, self>::type;
 
   // len will return the number of types in an array
   constexpr static std::size_t
@@ -102,7 +106,7 @@ public:
   for_each (Args &&...args)
   {
     if constexpr (Pos < length)
-      std::invoke (Func<at<Pos> > (), std::forward<Args> (args)...);
+      std::invoke (Func<at<Pos>> (), std::forward<Args> (args)...);
 
     if constexpr (Pos + 1 < length)
       for_each<Func, Pos + 1> (std::forward<Args> (args)...);
@@ -122,4 +126,4 @@ public:
   }
 };
 
-};
+}; // namespace mini_mpf

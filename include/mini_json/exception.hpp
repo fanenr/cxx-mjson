@@ -34,4 +34,4 @@ public:
   }
 };
 
-};
+}; // namespace mini_json

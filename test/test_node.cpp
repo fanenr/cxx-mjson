@@ -62,7 +62,7 @@ TEST_CASE ("test node array", "[node]")
   json::node arr2 (std::move (vec));
 
   {
-    auto &node = arr1.get<std::vector<json::node> > ();
+    auto &node = arr1.get<std::vector<json::node>> ();
     REQUIRE (node[2].get<std::string> () == "hello");
   }
 }
@@ -76,7 +76,7 @@ TEST_CASE ("test node object", "[node]")
   json::node obj2 (std::move (map));
 
   {
-    auto &node = obj1.get<std::unordered_map<std::string, json::node> > ();
+    auto &node = obj1.get<std::unordered_map<std::string, json::node>> ();
     REQUIRE (node["name"].get<std::string> () == "arthur");
     REQUIRE (node["age"].as<int> () == 19);
   }
